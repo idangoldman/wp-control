@@ -1,0 +1,27 @@
+install:
+  - cmd clean
+  - yarn install
+
+clean:
+  - rm -fr .dist .parcel-cache node_modules yarn.lock
+  - mkdir -p .dist
+
+build:
+  export:
+    NODE_ENV: production
+  commands:
+    - cmd clean
+    - parcel build ./src/manifest.json --dist-dir=.dist
+
+watch:
+  export:
+    NODE_ENV: development
+  commands:
+    - cmd clean
+    - parcel watch ./src/manifest.json --dist-dir=.dist --host localhost
+
+eslint:
+  - eslint src/javascripts/**/*.js
+
+eslint_fix:
+  - eslint --fix src/javascripts/**/*.js

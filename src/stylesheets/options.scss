@@ -1,0 +1,128 @@
+@import '~/src/stylesheets/general';
+
+#options-page {
+  margin: 0 auto;
+  min-height: 300px;
+  padding-bottom: 1.25rem;
+  padding-top: 1.25rem;
+  width: 420px;
+}
+
+.page--title {
+  padding-bottom: 0.25rem;
+}
+
+.page--description {
+  margin-bottom: 1.25rem;
+}
+
+.page--list .list-item {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0.625rem;
+  transition: all;
+
+  &:hover {
+    background-color: #f7f7ef;
+  }
+
+  .favicon {
+    align-items: center;
+    background-color: #f7f7ef;
+    border-radius: 16px;
+    display: flex;
+    flex-shrink: 0;
+    height: 60px;
+    justify-content: center;
+    user-select: none;
+    width: 60px;
+
+    img {
+      display: inline-block;
+      max-height: 48px;
+      max-width: 48px;
+    }
+  }
+
+  .site {
+    margin-left: 1rem;
+  }
+
+  .site > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 220px;
+  }
+
+  .site .label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .site .url {
+    color: #000;
+    opacity: 0.5;
+    font-size: 0.75rem;
+  }
+
+  .actions {
+    flex-grow: 1;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .actions a {
+    background-color: #edf2f7;
+    align-items: center;
+    border-radius: 100px;
+    display: flex;
+    height: 44px;
+    justify-content: center;
+    margin-left: 0.5rem;
+    width: 44px;
+
+    &:hover {
+      background-color: #e7f3db;
+    }
+  }
+}
+
+.create-site {
+  align-items: center;
+  background-color: #edf2f7;
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  margin: 20px auto;
+  position: relative;
+  user-select: none;
+  width: 40px;
+  z-index: 10;
+
+  &:hover {
+    background-color: #e7f3db;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 30;
+  }
+
+  object {
+    height: 20px;
+    position: relative;
+    width: 20px;
+    z-index: 20;
+  }
+}

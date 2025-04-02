@@ -1,36 +1,60 @@
 {
   "name": "wp-control",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Helps you navigate between all your WordPress websites.",
   "repository": "https://github.com/123code-il/wp-control",
   "author": "Idan Goldman <idan@123code.co>",
   "license": "MIT",
   "scripts": {
-    "watch": "rm -fr .dist && export NODE_ENV=development && parcel watch ./src/manifest.json --dist-dir=.dist --host localhost --config @parcel/config-webextension",
-    "build": "rm -fr .dist && export NODE_ENV=development && parcel build ./src/manifest.json --dist-dir=.dist --config @parcel/config-webextension"
+    "clean:install": "rm -frv build node_modules pnpm-lock.yaml",
+    "clean:cache": "rm -frv .parcel-cache build",
+    "clean": "pnpm run clean:install && pnpm run clean:cache",
+    "dev": "pnpm run clean:cache && parcel watch --host localhost --config .parcelrc"
   },
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=8.12.1"
+  },
+  "type": "module",
+  "imports": {
+    "~/*": "./*"
+  },
+  "targets": {
+    "default": {
+      "distDir": "build",
+      "engines": {
+        "browsers": "> 0.5%, last 2 versions, not dead"
+      },
+      "includeNodeModules": true,
+      "publicUrl": "/",
+      "scopeHoist": false,
+      "source": "src/manifest.json"
+    },
+    "templates": {
+      "distDir": "build/templates",
+      "publicUrl": "/templates",
+      "sourceMap": false,
+      "source": [
+        "src/views/templates/sites.html",
+        "src/views/templates/sites_list_item.html",
+        "src/views/templates/sites_list_item_new.html"
+      ]
+    }
+  },
+  "parcelIgnore": [
+    "{{.*}}"
+  ],
   "devDependencies": {
-    "@fontsource/roboto": "^4.5.7",
-    "@fontsource/roboto-mono": "^4.5.7",
-    "@hotwired/stimulus": "^3.0.1",
-    "@parcel/compressor-gzip": "^2.6.0",
-    "@parcel/config-webextension": "^2.6.0",
-    "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/typography": "^0.5.2",
-    "add": "^2.0.6",
-    "chokidar": "^3.5.3",
-    "cssnano": "^5.1.11",
-    "jquery": "^3.6.0",
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo": "8.0.0-beta.2",
+    "@parcel/compressor-gzip": "^2.10.3",
+    "@parcel/config-webextension": "^2.10.3",
+    "@parcel/transformer-inline-string": "^2.10.3",
+    "@parcel/transformer-sass": "2.10.3",
     "lodash": "^4.17.21",
-    "parcel": "^2.6.0",
-    "postcss": "^8.4.14",
-    "postcss-apply": "^0.12.0",
-    "postcss-atroot": "^0.2.3",
-    "postcss-extend-rule": "^4.0.0",
-    "postcss-import": "^14.1.0",
-    "postcss-import-url": "^7.0.0",
-    "postcss-url": "^10.1.3",
-    "tailwindcss": "^3.0.24",
-    "yarn": "^1.22.18"
+    "parcel": "^2.10.3",
+    "parcel-resolver-ignore": "^2.2.0",
+    "radash": "^11.0.0",
+    "sass": "^1.69.5"
   }
 }

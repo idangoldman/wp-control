@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+@import "https://developer.wordpress.org/wp-includes/css/dashicons.min.css";
+@import "https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap&lang=en";
+@import '~/src/stylesheets/forms/reset';
+
+body,
+input[type="text"] {
+  background-color: #fcfbf5;
+  font-family: 'Roboto Slab', serif;
+  letter-spacing: 0.025rem;
+}
+
+.page {
+  &--title,
+  &--description {
+    text-align: center;
+    user-select: none;
+  }
+
+  &--title {
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  &--description {
+    color: #000;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+  }
+}

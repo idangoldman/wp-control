@@ -1,30 +1,40 @@
 {
+  "manifest_version": 3,
+
   "name": "WP Control",
   "description": "Helps you navigate between all your WordPress websites.",
+  "author": "Idan Goldman",
+  "version": "0.2.0",
   "homepage_url": "https://github.com/123code-il/wp-control",
-  "version": "0.0.1",
-  "manifest_version": 3,
-  "action": {
-    "default_title": "WP Control is Awesome!",
-    "default_popup": "views/popup.html"
+  "incognito": "spanning",
+
+  "background": {
+    "service_worker": "javascripts/background.js"
   },
+
+  "action": {
+    "default_title": "Awesome!"
+  },
+
   "options_ui": {
     "page": "views/options.html",
     "open_in_tab": true
   },
+
   "icons": {
     "16": "images/wordpress.logo.png",
     "32": "images/wordpress.logo.png",
     "48": "images/wordpress.logo.png",
     "128": "images/wordpress.logo.png"
   },
+
   "permissions": [
     "scripting",
     "storage",
     "tabs"
   ],
+
   "host_permissions": [
-    "https://*/*",
-    "http://*/*"
+    "<all_urls>"
   ]
 }
