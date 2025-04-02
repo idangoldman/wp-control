@@ -1,33 +1,62 @@
+import { uid } from 'radash'
+
 export default class BaseModel {
-  static #defaults = {
+  name = "base";
+
+  static defaults = {
     id: null,
-    created_at: null,
-    updated_at: null
+    changed_at: null,
+  };
+
+  static async all(defaultCollection = []) {
+    console.log( 'all' )
+    return (await chrome.storage.sync.get([this.name])) || defaultCollection;
   }
 
-  constructor ( data ) {
+  static async find(id) {
+    const models = await this.all();
+    return models.find((m) => m.id === id)
   }
 
-  static async all () {
-    return await chrome.storage.sync.get( ['sites'] )
+  async create(model) {
+    const models = await this.all();
+
+    model = {
+      id: uid(),
+      changed_at: new Date().toISOString(),
+      ...model,
+    };
+
+    const collection = {
+      [this.name]: [...models, model],
+    };
+
+    return await chrome.storage.sync.set(collection);
   }
 
-  static async create ( site ) {
-    const sites = await this.all()
-    sites.push( site )
-    return await chrome.storage.sync.set( { sites } )
+  async change(model) {
+    const models = await this.all();
+
+    if (select(models, (f) => f.id).length) {
+      const collection = {
+        [this.name]: { ...models, ...model },
+      };
+
+      return await chrome.storage.sync.set(collection);
+    }
   }
 
-  static async update ( site ) {
-    const sites = await this.all()
-    sites[ site.id ] = site
-    return await chrome.storage.sync.set( { sites } )
-  }
+  async remove(model) {
+    const models = await this.all();
+    const modelIndex = models.findIndex((m) => m.id === model.id);
 
-  static async delete ( site ) {
-    const sites = await this.all()
-    sites.splice( site.id, 1 )
-    return await chrome.storage.sync.set( { sites } )
+    if (modelIndex !== -1 && models.splice(modelIndex, 1).length) {
+      const collection = {
+        [this.name]: [...models],
+      };
+
+      return await chrome.storage.sync.set(collection);
+    }
   }
 
   // find () {}

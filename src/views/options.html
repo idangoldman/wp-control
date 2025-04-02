@@ -1,12 +1,14 @@
 <!DOCTYPE html><html><head>
+
   <meta charset="utf-8">
   <title>Web Pages</title>
   <link rel="stylesheet" href="~/src/stylesheets/options.scss">
   <script type="module" src="~/src/javascripts/options.js"></script>
-</head><body>
 
-  <div id="options-page" data-controller="router">
-    <header data-router-target="header">
+</head><body id="options-page">
+
+  <div class="page" data-controller="sites">
+    <header class="page--header">
       <h1 class="page--title">
         Web Pages
       </h1>
@@ -16,7 +18,7 @@
       </p>
     </header>
 
-    <main data-router-target="main">
+    <main class="page--main">
     </main>
   </div>
 
